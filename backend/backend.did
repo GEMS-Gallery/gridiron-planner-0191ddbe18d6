@@ -1,0 +1,29 @@
+type Time = int;
+type Team = 
+ record {
+   abbreviation: text;
+   name: text;
+ };
+type GameResult = 
+ record {
+   awayScore: nat;
+   awayTeam: text;
+   homeScore: nat;
+   homeTeam: text;
+   week: nat;
+ };
+type Game = 
+ record {
+   awayTeam: text;
+   date: Time;
+   homeTeam: text;
+   week: nat;
+ };
+service : {
+  addGame: (text, text, Time, nat) -> ();
+  addScore: (text, text, nat, nat, nat) -> ();
+  getSchedule: (nat) -> (vec Game) query;
+  getScores: (nat) -> (vec GameResult) query;
+  getTeams: () -> (vec Team) query;
+  initialize: () -> ();
+}

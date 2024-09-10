@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Schedule and Scores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="src/index.css">
+</head>
+<body>
+    <header>
+        <h1>NFL Schedule and Scores</h1>
+        <div id="week-selector">
+            <label for="week">Select Week:</label>
+            <select id="week">
+                <option value="1">Week 1</option>
+                <option value="2">Week 2</option>
+                <option value="3">Week 3</option>
+                <option value="4">Week 4</option>
+            </select>
+        </div>
+    </header>
+    <main>
+        <section id="schedule-scores">
+            <h2>Schedule & Scores</h2>
+            <div id="games-list"></div>
+        </section>
+        <section id="team-overview">
+            <h2>Team Overview</h2>
+            <div id="teams-list"></div>
+        </section>
+    </main>
+    <div id="loader" class="hidden">
+        <i class="fas fa-football-ball fa-spin"></i>
+    </div>
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>
