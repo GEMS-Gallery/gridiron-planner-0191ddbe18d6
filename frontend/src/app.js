@@ -18,8 +18,11 @@ async function loadTeams() {
         const teams = await backend.getTeams();
         teamsList.innerHTML = teams.map(team => `
             <div class="team-card">
-                <h3>${team.name}</h3>
-                <p>Abbreviation: ${team.abbreviation}</p>
+                <img src="${team.logoUrl}" alt="${team.name} logo" class="team-logo">
+                <div>
+                    <h3>${team.name}</h3>
+                    <p>Abbreviation: ${team.abbreviation}</p>
+                </div>
             </div>
         `).join('');
     } catch (error) {
@@ -32,22 +35,31 @@ async function loadGames() {
     showLoader();
     const selectedWeek = Number(weekSelector.value);
     try {
-        const [schedule, scores] = await Promise.all([
+        const [schedule, scores, teams] = await Promise.all([
             backend.getSchedule(selectedWeek),
-            backend.getScores(selectedWeek)
+            backend.getScores(selectedWeek),
+            backend.getTeams()
         ]);
+
+        const teamMap = new Map(teams.map(team => [team.name, team]));
 
         gamesList.innerHTML = schedule.map(game => {
             const score = scores.find(s => s.homeTeam === game.homeTeam && s.awayTeam === game.awayTeam);
+            const homeTeam = teamMap.get(game.homeTeam);
+            const awayTeam = teamMap.get(game.awayTeam);
             return `
                 <div class="game-card">
-                    <h3>${game.awayTeam} @ ${game.homeTeam}</h3>
-                    <p>Date: ${new Date(Number(game.date) / 1000000).toLocaleString()}</p>
-                    ${score ? `
-                        <p>Final Score:</p>
-                        <p>${score.awayTeam}: ${score.awayScore}</p>
-                        <p>${score.homeTeam}: ${score.homeScore}</p>
-                    ` : '<p>Score not available</p>'}
+                    <img src="${awayTeam.logoUrl}" alt="${awayTeam.name} logo" class="team-logo">
+                    <div>
+                        <h3>${game.awayTeam} @ ${game.homeTeam}</h3>
+                        <p>Date: ${new Date(Number(game.date) / 1000000).toLocaleString()}</p>
+                        ${score ? `
+                            <p>Final Score:</p>
+                            <p>${score.awayTeam}: ${score.awayScore}</p>
+                            <p>${score.homeTeam}: ${score.homeScore}</p>
+                        ` : '<p>Score not available</p>'}
+                    </div>
+                    <img src="${homeTeam.logoUrl}" alt="${homeTeam.name} logo" class="team-logo">
                 </div>
             `;
         }).join('');

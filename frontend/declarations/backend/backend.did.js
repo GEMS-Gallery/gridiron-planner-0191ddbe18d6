@@ -13,7 +13,11 @@ export const idlFactory = ({ IDL }) => {
     'awayTeam' : IDL.Text,
     'awayScore' : IDL.Nat,
   });
-  const Team = IDL.Record({ 'name' : IDL.Text, 'abbreviation' : IDL.Text });
+  const Team = IDL.Record({
+    'name' : IDL.Text,
+    'logoUrl' : IDL.Text,
+    'abbreviation' : IDL.Text,
+  });
   return IDL.Service({
     'addGame' : IDL.Func([IDL.Text, IDL.Text, Time, IDL.Nat], [], []),
     'addScore' : IDL.Func(

@@ -13,6 +13,7 @@ actor {
   type Team = {
     name: Text;
     abbreviation: Text;
+    logoUrl: Text;
   };
 
   type Game = {
@@ -37,10 +38,10 @@ actor {
   // Initialize some sample data
   public func initialize() : async () {
     teams := [
-      { name = "New England Patriots"; abbreviation = "NE" },
-      { name = "Buffalo Bills"; abbreviation = "BUF" },
-      { name = "Miami Dolphins"; abbreviation = "MIA" },
-      { name = "New York Jets"; abbreviation = "NYJ" }
+      { name = "New England Patriots"; abbreviation = "NE"; logoUrl = "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png" },
+      { name = "Buffalo Bills"; abbreviation = "BUF"; logoUrl = "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png" },
+      { name = "Miami Dolphins"; abbreviation = "MIA"; logoUrl = "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png" },
+      { name = "New York Jets"; abbreviation = "NYJ"; logoUrl = "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png" }
     ];
 
     schedule := [

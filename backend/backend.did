@@ -2,6 +2,7 @@ type Time = int;
 type Team = 
  record {
    abbreviation: text;
+   logoUrl: text;
    name: text;
  };
 type GameResult = 

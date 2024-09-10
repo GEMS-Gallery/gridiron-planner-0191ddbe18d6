@@ -15,7 +15,11 @@ export interface GameResult {
   'awayTeam' : string,
   'awayScore' : bigint,
 }
-export interface Team { 'name' : string, 'abbreviation' : string }
+export interface Team {
+  'name' : string,
+  'logoUrl' : string,
+  'abbreviation' : string,
+}
 export type Time = bigint;
 export interface _SERVICE {
   'addGame' : ActorMethod<[string, string, Time, bigint], undefined>,
